@@ -35,7 +35,7 @@ public class UserController {
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<?> findUser(@PathVariable UUID userId) {
+	public ResponseEntity<?> findUser(@PathVariable("id") UUID userId) {
 		Optional<UserModel> user = userRepository.findById(userId);
 		if(user.isPresent()) {
 			return new ResponseEntity<>(user, HttpStatus.OK);
@@ -44,7 +44,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("delete/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable UUID userId) {
+	public ResponseEntity<String> deleteUser(@PathVariable("id") UUID userId) {
 		Optional<UserModel> user = userRepository.findById(userId);
 		if(user.isPresent()) {
 			userRepository.deleteById(userId);
@@ -54,7 +54,7 @@ public class UserController {
 	}
 
 	@PutMapping("update/{id}")
-	public ResponseEntity<?> editarUsario(@RequestBody @Valid UserModel user, @PathVariable UUID userId) {
+	public ResponseEntity<?> editarUsario(@RequestBody @Valid UserModel user, @PathVariable("id") UUID userId) {
 		Optional<UserModel> foundOpt = userRepository.findById(userId);
 		if(foundOpt.isPresent()) {
 			UserModel found = foundOpt.get();
