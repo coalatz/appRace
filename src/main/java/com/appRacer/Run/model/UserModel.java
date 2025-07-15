@@ -24,22 +24,22 @@ public class UserModel {
 	@Setter(AccessLevel.NONE)
 	private UUID userId;
 	@Column(nullable = false)
-	@NotNull(message = "campo nome completo obrigatorio")
+	@NotNull(message = "mandatory name field")
 	private String name;
 	@Column(nullable = false, unique = true)
-	@NotNull(message = "campo cpf obrigatorio")
+	@NotNull(message = "mandatory cpf field")
 	private String cpf;
 	@Column(nullable = false)
-	@NotNull(message = "campo idade obrigatorio")
+	@NotNull(message = "mandatory age field")
 	private int age;
 	@Column(nullable = false)
-	@NotNull(message = "campo altura obrigatorio")
+	@NotNull(message = "mandatory height field")
 	private float height;
 	@Column(nullable = false)
-	@NotNull(message = "campo peso obrigatorio")
+	@NotNull(message = "mandatory peso weight field")
 	private float weight;
 	@Column(nullable = false)
-	@NotNull(message = "campo imc obrigatorio")
+	@NotNull(message = "mandatory imc field")
 	private float imc;
 
 	public UserModel(String name, String cpf, int age, float height, float weight, float imc) {

@@ -54,7 +54,7 @@ public class UserController {
 	}
 
 	@PutMapping("update/{id}")
-	public ResponseEntity<?> editarUsario(@RequestBody @Valid UserModel user, @PathVariable("id") UUID userId) {
+	public ResponseEntity<?> updateUsario(@RequestBody @Valid UserModel user, @PathVariable("id") UUID userId) {
 		Optional<UserModel> foundOpt = userRepository.findById(userId);
 		if(foundOpt.isPresent()) {
 			UserModel found = foundOpt.get();
