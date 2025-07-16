@@ -1,5 +1,7 @@
 package com.appRacer.Run.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,6 +43,12 @@ public class UserController {
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("users")
+	public ResponseEntity<List<UserModel>> listAllUsers() {
+		List<UserModel> listUsers = userRepository.findAll();	
+		return new ResponseEntity<>(listUsers, HttpStatus.OK);
 	}
 
 	@DeleteMapping("delete/{id}")
