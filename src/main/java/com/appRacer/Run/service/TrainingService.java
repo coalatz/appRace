@@ -13,8 +13,8 @@ public class TrainingService {
         @Autowired
         private TrainingRepository trainingRepository;
 
-        public TrainingModel save(TrainingModel treino) {
-            return trainingRepository.save(treino);
+        public TrainingModel save(TrainingModel training) {
+            return trainingRepository.save(training);
         }
 
         public List<TrainingModel> listAll() {
@@ -26,17 +26,17 @@ public class TrainingService {
                     .orElseThrow(() -> new RuntimeException("Treino não encontrado com ID: " + id));
         }
 
-        public TrainingModel update(Long id, TrainingModel treinoAtualizado) {
+        public TrainingModel update(Long id, TrainingModel trainingUpdate) {
 
-            TrainingModel treino = findById(id);
-            treino.setType(treinoAtualizado.getType());
-            treino.setDistanceKm(treinoAtualizado.getDistanceKm());
-            treino.setTargetPace(treinoAtualizado.getTargetPace());
-            treino.setIntensity(treinoAtualizado.getIntensity());
-            treino.setCompleted(treinoAtualizado.isCompleted());
-            treino.setNotes(treinoAtualizado.getNotes());
+            TrainingModel training = findById(id);
+            training.setType(trainingUpdate.getType());
+            training.setDistanceKm(trainingUpdate.getDistanceKm());
+            training.setTargetPace(trainingUpdate.getTargetPace());
+            training.setIntensity(trainingUpdate.getIntensity());
+            training.setCompleted(trainingUpdate.isCompleted());
+            training.setNotes(trainingUpdate.getNotes());
 
-            return trainingRepository.save(treino);
+            return trainingRepository.save(training);
         }
 
         public void delete(Long id) {
