@@ -45,7 +45,7 @@ public class UserController {
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
 	
-	@GetMapping("users")
+	@GetMapping("list")
 	public ResponseEntity<List<UserModel>> listAllUsers() {
 		List<UserModel> listUsers = userRepository.findAll();	
 		return new ResponseEntity<>(listUsers, HttpStatus.OK);
@@ -72,6 +72,8 @@ public class UserController {
             found.setHeight(user.getHeight());
             found.setWeight(user.getWeight());
             found.setImc(user.getImc());
+            
+            userRepository.save(found);
 
             return new ResponseEntity<>(found, HttpStatus.OK);
 
