@@ -11,7 +11,7 @@ import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.MediaType;
 import org.springdoc.core.customizers.OpenApiCustomizer;
-import io.swagger.v3.oas.models.Operation;               // representa um método HTTP de um endpoint
+import io.swagger.v3.oas.models.Operation;              
 import io.swagger.v3.oas.models.PathItem;
 import io.swagger.v3.oas.models.PathItem.HttpMethod;
 
@@ -30,7 +30,7 @@ public class SwaggerConfiguration {
 	}
 
     @Bean
-    public OpenApiCustomizer globalResponsesCustomizer() {
+    OpenApiCustomizer globalResponsesCustomizer() {
         return openApi -> {
             openApi.getPaths().forEach((pathUrl, pathItem) -> {
             	

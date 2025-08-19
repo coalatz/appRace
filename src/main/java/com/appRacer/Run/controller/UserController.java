@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -61,17 +62,18 @@ public class UserController {
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
 
-	@PutMapping("update/{id}")
+	@PatchMapping("update/{id}")
 	public ResponseEntity<?> updateUsario(@RequestBody @Valid UserModel user, @PathVariable("id") UUID userId) {
 		Optional<UserModel> foundOpt = userRepository.findById(userId);
 		if(foundOpt.isPresent()) {
 			UserModel found = foundOpt.get();
-			found.setName(user.getName());
-            found.setCpf(user.getCpf());
-            found.setAge(user.getAge());
-            found.setHeight(user.getHeight());
-            found.setWeight(user.getWeight());
-            found.setImc(user.getImc());
+			
+			if(found.getName() != user.getName()) found.setName(user.getName());
+			if(found.getCpf() != user.getCpf()) found.setCpf(user.getCpf());
+            if(found.getAge() != user.getAge()) found.setAge(user.getAge());
+            if(found.getHeight() != user.getHeight()) found.setHeight(user.getHeight());
+            if(found.getWeight() != user.getWeight()) found.setWeight(user.getWeight());
+            if(found.getImc() != user.getImc()) found.setImc(user.getImc());
             
             userRepository.save(found);
 
