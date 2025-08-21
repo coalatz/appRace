@@ -1,7 +1,19 @@
+<<<<<<< HEAD
 com\appRacer\Run\repository\UserRepository.class
 com\appRacer\Run\config\exception\CustomExceptionHandler.class
 com\appRacer\Run\RunApplication.class
 com\appRacer\Run\config\exception\ApiErrorMessage.class
 com\appRacer\Run\model\UserModel.class
 com\appRacer\Run\controller\UserController.class
+=======
+com\appRacer\Run\model\TrainingModel.class
+com\appRacer\Run\repository\UserRepository.class
+com\appRacer\Run\service\TrainingService.class
+com\appRacer\Run\RunApplication.class
+com\appRacer\Run\repository\TrainingRepository.class
+com\appRacer\Run\model\UserModel.class
+com\appRacer\Run\controller\TrainingController.class
+com\appRacer\Run\controller\UserController.class
+com\appRacer\Run\model\TrainingModel$TrainingModelBuilder.class
+>>>>>>> 5df7b960bd2b3553da2966903e1b8abf7691c283
 com\appRacer\Run\configuration\SwaggerConfiguration.class
