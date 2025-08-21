@@ -46,7 +46,7 @@ public class UserController {
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
 	
-	@GetMapping("list")
+	@GetMapping("users")
 	public ResponseEntity<List<UserModel>> listAllUsers() {
 		List<UserModel> listUsers = userRepository.findAll();	
 		return new ResponseEntity<>(listUsers, HttpStatus.OK);
@@ -66,8 +66,7 @@ public class UserController {
 	public ResponseEntity<?> updateUsario(@RequestBody @Valid UserModel user, @PathVariable("id") UUID userId) {
 		Optional<UserModel> foundOpt = userRepository.findById(userId);
 		if(foundOpt.isPresent()) {
-			UserModel found = foundOpt.get();
-			
+			UserModel found = foundOpt.get();			
 			if(found.getName() != user.getName()) found.setName(user.getName());
 			if(found.getCpf() != user.getCpf()) found.setCpf(user.getCpf());
             if(found.getAge() != user.getAge()) found.setAge(user.getAge());
@@ -77,11 +76,10 @@ public class UserController {
             
             userRepository.save(found);
 
+
             return new ResponseEntity<>(found, HttpStatus.OK);
 
 		}
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
-
-
 }

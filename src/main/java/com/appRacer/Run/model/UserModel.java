@@ -50,7 +50,4 @@ public class UserModel {
 	    this.weight = weight;
 	    this.imc = imc;
 	}
-
-
-
 }
