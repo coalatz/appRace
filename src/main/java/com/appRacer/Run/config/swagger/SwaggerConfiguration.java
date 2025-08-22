@@ -42,15 +42,25 @@ public class SwaggerConfiguration {
                     operation.getResponses().addApiResponse("500",
                             new ApiResponse().description("Internal error").content(internalErrorContent));
 
-                    if (httpMethod == PathItem.HttpMethod.PUT || httpMethod == PathItem.HttpMethod.PATCH || httpMethod == PathItem.HttpMethod.POST) {
+                    if ( httpMethod == PathItem.HttpMethod.POST) {
                         Content validationErrorContent = new Content()
                                 .addMediaType("application/json",
                                         new MediaType().example("{ \"mensagem\": \"Validation error\" }"));
                         operation.getResponses().addApiResponse("400",
                                 new ApiResponse().description("Invalid request").content(validationErrorContent));
                     }
+                    
+                    if( httpMethod == PathItem.HttpMethod.PATCH || httpMethod == PathItem.HttpMethod.GET || httpMethod == PathItem.HttpMethod.DELETE) {
+                    	Content notFoundContent = new Content()
+                    			.addMediaType("application/json",
+                    					new MediaType().example("{ \"mensagem\": \"User not found\"}"));
+                    			operation.getResponses().addApiResponse("404", 
+                    			new ApiResponse().description("User invalid").content(notFoundContent));
+                    }
+                    
                 });
             });
         };
     }
 }
+
