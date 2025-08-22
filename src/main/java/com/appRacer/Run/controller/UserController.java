@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appRacer.Run.model.UserModel;
+import com.appRacer.Run.model.UserPatchModel;
 import com.appRacer.Run.repository.UserRepository;
 
 import jakarta.validation.Valid;
@@ -63,16 +64,16 @@ public class UserController {
 	}
 
 	@PatchMapping("update/{id}")
-	public ResponseEntity<?> updateUsario(@RequestBody @Valid UserModel user, @PathVariable("id") UUID userId) {
+	public ResponseEntity<?> updateUsario(@RequestBody UserPatchModel user, @PathVariable("id") UUID userId) {
 		Optional<UserModel> foundOpt = userRepository.findById(userId);
 		if(foundOpt.isPresent()) {
 			UserModel found = foundOpt.get();			
-			if(found.getName() != user.getName()) found.setName(user.getName());
-			if(found.getCpf() != user.getCpf()) found.setCpf(user.getCpf());
-            if(found.getAge() != user.getAge()) found.setAge(user.getAge());
-            if(found.getHeight() != user.getHeight()) found.setHeight(user.getHeight());
-            if(found.getWeight() != user.getWeight()) found.setWeight(user.getWeight());
-            if(found.getImc() != user.getImc()) found.setImc(user.getImc());
+			if(found.getName() != user.getName() && user.getName() != null) found.setName(user.getName());
+			if(found.getCpf() != user.getCpf() && user.getCpf() != null) found.setCpf(user.getCpf());
+            if(found.getAge() != user.getAge() && user.getAge() != null) found.setAge(user.getAge());
+            if(found.getHeight() != user.getHeight() && user.getHeight() != null) found.setHeight(user.getHeight());
+            if(found.getWeight() != user.getWeight() && user.getWeight() != null) found.setWeight(user.getWeight());
+            if(found.getImc() != user.getImc() && user.getImc() != null) found.setImc(user.getImc());
             
             userRepository.save(found);
 
