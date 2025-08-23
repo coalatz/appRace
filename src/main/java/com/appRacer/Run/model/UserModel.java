@@ -42,6 +42,7 @@ public class UserModel {
 	private Float weight;
 	@Column
 	@NotNull(message = "mandatory imc field")
+	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	private Float imc;
 
 	public UserModel(String name, String cpf, Integer age, Float height, Float weight, Float imc) {
