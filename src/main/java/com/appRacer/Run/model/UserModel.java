@@ -41,7 +41,6 @@ public class UserModel {
 	@NotNull(message = "mandatory peso weight field")
 	private Float weight;
 	@Column
-	@NotNull(message = "mandatory imc field")
 	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	private Float imc;
 
