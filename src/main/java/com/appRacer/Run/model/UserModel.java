@@ -2,6 +2,7 @@ package com.appRacer.Run.model;
 
 import java.util.UUID;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class UserModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	private UUID userId;
 	@Column
 	@NotBlank(message = "mandatory name field")
@@ -39,7 +41,7 @@ public class UserModel {
 	@NotNull(message = "mandatory peso weight field")
 	private Float weight;
 	@Column
-	@NotNull(message = "mandatory imc field")
+	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	private Float imc;
 
 	public UserModel(String name, String cpf, Integer age, Float height, Float weight, Float imc) {
