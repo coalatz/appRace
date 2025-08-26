@@ -34,7 +34,7 @@ Execute com o comando:
 ## 🌐 Acesso à API
 Após a execução, a API estará disponível em:
 ```
-http://localhost:8080
+http://localhost:8009
 ```
 
 A interface gráfica do **Swagger** pode ser acessada em:
