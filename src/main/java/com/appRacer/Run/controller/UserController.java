@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.appRacer.Run.model.UserModel;
 import com.appRacer.Run.model.UserPatchModel;
 import com.appRacer.Run.repository.UserRepository;
+import com.appRacer.Run.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -29,20 +30,19 @@ public class UserController {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	UserService userService;
 
 	@PostMapping("register")
 	public ResponseEntity<UserModel> registerUser(@RequestBody @Valid UserModel user) {
-		Float imc =  user.getWeight() / (user.getHeight() * user.getHeight());
-		imc = Math.round(imc * 100f) /100f;
-		user.setImc(imc);
-		userRepository.save(user);
+		userService.save(user);
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 
 	@GetMapping("{id}")
 	public ResponseEntity<?> findUser(@PathVariable("id") UUID userId) {
-		Optional<UserModel> user = userRepository.findById(userId);
-		if(user.isPresent()) {
+		UserModel user = userService.UserFindId(userId);
+		if(user != null) {
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
@@ -50,38 +50,23 @@ public class UserController {
 	
 	@GetMapping("users")
 	public ResponseEntity<List<UserModel>> listAllUsers() {
-		List<UserModel> listUsers = userRepository.findAll();	
+		List<UserModel> listUsers = userService.usersFindAll();	
 		return new ResponseEntity<>(listUsers, HttpStatus.OK);
 	}
 
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable("id") UUID userId) {
-		Optional<UserModel> user = userRepository.findById(userId);
-		if(user.isPresent()) {
-			userRepository.deleteById(userId);
-			return new ResponseEntity<>("user deleted successfully", HttpStatus.OK);
-		}
+		int user = userService.userDelete(userId);
+		
+		if(user == 1) {return new ResponseEntity<>("user deleted successfully", HttpStatus.OK);}
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
 
 	@PatchMapping("update/{id}")
-	public ResponseEntity<?> updateUsario(@RequestBody UserPatchModel user, @PathVariable("id") UUID userId) {
-		Optional<UserModel> foundOpt = userRepository.findById(userId);
-		if(foundOpt.isPresent()) {
-			UserModel found = foundOpt.get();			
-			if(found.getName() != user.getName() && user.getName() != null) found.setName(user.getName());
-			if(found.getCpf() != user.getCpf() && user.getCpf() != null) found.setCpf(user.getCpf());
-            if(found.getAge() != user.getAge() && user.getAge() != null) found.setAge(user.getAge());
-            if(found.getHeight() != user.getHeight() && user.getHeight() != null) found.setHeight(user.getHeight());
-            if(found.getWeight() != user.getWeight() && user.getWeight() != null) found.setWeight(user.getWeight());
-            if(found.getImc() != user.getImc() && user.getImc() != null) found.setImc(user.getImc());
-            
-            userRepository.save(found);
-
-
-            return new ResponseEntity<>(found, HttpStatus.OK);
-
-		}
+	public ResponseEntity<?> updateUser(@RequestBody UserPatchModel user, @PathVariable("id") UUID userId) {
+		UserModel userUp = userService.updateUser(user, userId);
+		
+		if(userUp != null) {return new ResponseEntity<>(userUp, HttpStatus.OK);}
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
 }
