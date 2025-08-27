@@ -20,6 +20,13 @@ import com.appRacer.Run.model.UserModel;
 import com.appRacer.Run.model.UserPatchModel;
 import com.appRacer.Run.repository.UserRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.models.media.MediaType;
 import jakarta.validation.Valid;
 
 
@@ -31,6 +38,33 @@ public class UserController {
 	UserRepository userRepository;
 
 	@PostMapping("register")
+	@Operation(summary = "Register a new user")
+	@ApiResponses(value = {
+		    @ApiResponse(
+		        responseCode = "201",
+		        description = "Register a new user",
+		        content = @Content(
+		            mediaType = "application/json",
+		            schema = @Schema(implementation = UserModel.class)
+		        )),
+		    @ApiResponse(
+		        responseCode = "400",
+		        description = "Invalid data",
+		        content = @Content(
+		            mediaType = "application/json",
+		            examples = @ExampleObject("""
+		            {
+		              "errors": [
+		                "height: height: must be greater than or equal to 1",
+		                "weight: weight: must be greater than or equal to 20",
+		                "name: name: size must be between 10 and 64",
+		                "cpf: CPF: size must be between 11 and 15",
+		                "age: age: must be greater than or equal to 4"
+		              ]
+		            }""")
+		        )
+		    )
+		})
 	public ResponseEntity<UserModel> registerUser(@RequestBody @Valid UserModel user) {
 		Float imc =  user.getWeight() / (user.getHeight() * user.getHeight());
 		imc = Math.round(imc * 100f) /100f;
@@ -39,6 +73,20 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 
+	@ApiResponses( value = {
+			@ApiResponse(responseCode = "404", 
+				description = "User not found",
+				content = @Content(
+						mediaType = "application/json",
+						examples = @ExampleObject("{ \"mensagem\": \"User not found\"}")
+					)),
+			@ApiResponse(responseCode = "200",
+				description = "list user by id",
+				content = @Content(
+						mediaType = "application/json",
+						schema = @Schema(implementation = UserModel.class)))	
+	})
+	@Operation(summary = "List user by id")
 	@GetMapping("{id}")
 	public ResponseEntity<?> findUser(@PathVariable("id") UUID userId) {
 		Optional<UserModel> user = userRepository.findById(userId);
@@ -48,12 +96,31 @@ public class UserController {
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
 	
+	@Operation(summary = "List all users")
+	@ApiResponse(responseCode = "200",
+			description = "list all users",
+			content = @Content(
+					mediaType = "application/json",
+					schema = @Schema(implementation = UserModel.class)))
 	@GetMapping("users")
 	public ResponseEntity<List<UserModel>> listAllUsers() {
 		List<UserModel> listUsers = userRepository.findAll();	
 		return new ResponseEntity<>(listUsers, HttpStatus.OK);
 	}
-
+	
+	@Operation(summary = "Delete user by id")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200",
+					description = "delete user by id",
+					content = @Content(
+							mediaType = "application/json",
+							examples = @ExampleObject("{ \"mensagem\": \"User deleted successfully\"}"))),
+			@ApiResponse(responseCode = "404", 
+					description = "user not found",
+					content = @Content(
+							mediaType = "application/json",
+							examples = @ExampleObject("{ \"mensagem\": \"User not found\"}")))
+	})
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable("id") UUID userId) {
 		Optional<UserModel> user = userRepository.findById(userId);
@@ -64,8 +131,21 @@ public class UserController {
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
 
+	@Operation(summary = "Update user by id")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "404",
+					description = "user not found",
+					content = @Content(
+							mediaType = "application/json",
+							examples = @ExampleObject("{ \"mensagem\": \"User not found\"}"))),
+			@ApiResponse(responseCode = "200",
+					description = "update user by id",
+					content = @Content(
+							mediaType = "application/json",
+							schema = @Schema(implementation = UserModel.class)))
+	})
 	@PatchMapping("update/{id}")
-	public ResponseEntity<?> updateUsario(@RequestBody UserPatchModel user, @PathVariable("id") UUID userId) {
+	public ResponseEntity<?> updateUsario(@Valid @RequestBody UserPatchModel user, @PathVariable("id") UUID userId) {
 		Optional<UserModel> foundOpt = userRepository.findById(userId);
 		if(foundOpt.isPresent()) {
 			UserModel found = foundOpt.get();			
@@ -74,7 +154,6 @@ public class UserController {
             if(found.getAge() != user.getAge() && user.getAge() != null) found.setAge(user.getAge());
             if(found.getHeight() != user.getHeight() && user.getHeight() != null) found.setHeight(user.getHeight());
             if(found.getWeight() != user.getWeight() && user.getWeight() != null) found.setWeight(user.getWeight());
-            if(found.getImc() != user.getImc() && user.getImc() != null) found.setImc(user.getImc());
             
             userRepository.save(found);
 
