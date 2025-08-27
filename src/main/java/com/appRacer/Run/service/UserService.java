@@ -59,7 +59,6 @@ public class UserService {
             if(found.getAge() != user.getAge() && user.getAge() != null) found.setAge(user.getAge());
             if(found.getHeight() != user.getHeight() && user.getHeight() != null) found.setHeight(user.getHeight());
             if(found.getWeight() != user.getWeight() && user.getWeight() != null) found.setWeight(user.getWeight());
-            if(found.getImc() != user.getImc() && user.getImc() != null) found.setImc(user.getImc());
             userRepository.save(found);
             return found;
 		}

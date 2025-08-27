@@ -8,7 +8,7 @@ Antes de rodar o projeto, certifique-se de ter instalado:
 ## ⚙️ Instalação
 1. Clone este repositório:
    ```bash
-   git clone <url-do-repositorio>
+   git clone git@github.com:coalatz/appRace.git
    cd Run
    ```
 
@@ -20,11 +20,7 @@ Antes de rodar o projeto, certifique-se de ter instalado:
 ## ▶️ Execução
 Você pode rodar o projeto de duas formas:
 
-### 1. Pela IDE
-- Importar o projeto como **Maven Project**.
-- Rodar a aplicação diretamente pela sua IDE (Spring Boot Application).
-
-### 2. Via terminal com o `.jar` gerado
+### Via terminal com o `.jar` gerado
 Após o build, o Maven irá gerar o artefato `Run.jar` dentro da pasta `target`.  
 Execute com o comando:
    ```bash
@@ -37,7 +33,6 @@ Após a execução, a API estará disponível em:
 http://localhost:8009
 ```
 
-A interface gráfica do **Swagger** pode ser acessada em:
-```
-http://localhost:8009/swagger-ui.html
-```
+Acesse o **Swagger** no ambiente de homologação:
+
+https://apprace-3.onrender.com/swagger-ui/index.html
