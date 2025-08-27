@@ -2,6 +2,8 @@ package com.appRacer.Run.model;
 
 import java.util.UUID;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,6 +39,7 @@ public class UserModel {
 	@NotBlank(message = "mandatory cpf field")
 	@Schema(example = "111.222.333-04")
 	@Size(min = 11, max = 15, message = "CPF: size must be between 11 and 15")
+	@CPF
 	private String cpf;
 	@Column
 	@NotNull(message = "mandatory age field")
