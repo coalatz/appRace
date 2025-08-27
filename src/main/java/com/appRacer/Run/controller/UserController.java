@@ -142,7 +142,24 @@ public class UserController {
 					description = "update user by id",
 					content = @Content(
 							mediaType = "application/json",
-							schema = @Schema(implementation = UserModel.class)))
+							schema = @Schema(implementation = UserModel.class))),
+			@ApiResponse(
+			        responseCode = "400",
+			        description = "Invalid data",
+			        content = @Content(
+			            mediaType = "application/json",
+			            examples = @ExampleObject("""
+			            {
+			              "errors": [
+			                "height: height: must be greater than or equal to 1",
+			                "weight: weight: must be greater than or equal to 20",
+			                "name: name: size must be between 10 and 64",
+			                "cpf: CPF: size must be between 11 and 15",
+			                "age: age: must be greater than or equal to 4"
+			              ]
+			            }""")
+			        )
+			    )
 	})
 	@PatchMapping("update/{id}")
 	public ResponseEntity<?> updateUsario(@Valid @RequestBody UserPatchModel user, @PathVariable("id") UUID userId) {
