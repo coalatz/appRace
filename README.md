@@ -35,4 +35,4 @@ http://localhost:8009
 
 Acesse o **Swagger** no ambiente de homologação:
 
-https://apprace-3.onrender.com/swagger-ui/index.html
+https://apprace-3.onrender.com/swagger-ui/index.html{:target="_blank"}.
