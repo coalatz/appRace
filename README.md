@@ -38,3 +38,4 @@ Acesse o **Swagger** no ambiente de homologação:
 [Interface Swagger](https://apprace-3.onrender.com/swagger-ui/index.html)
 
 <a href="https://apprace-3.onrender.com/swagger-ui/index.html" target="_blank">https://apprace-3.onrender.com/swagger-ui/index.html</a>
+<a href="[http://example.com/](https://apprace-3.onrender.com/swagger-ui/index.html)" target="_blank">example</a>
