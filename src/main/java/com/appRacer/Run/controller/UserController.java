@@ -66,7 +66,14 @@ public class UserController {
 		              ]
 		            }""")
 		        )
-		    )
+		    ),
+		    @ApiResponse(
+		    		responseCode = "409",
+		    		description = "CPF already registered",
+		    		content = @Content(
+		    				mediaType = "application/json",
+		    				examples = @ExampleObject("{ \"mensagem\": \"CPF already registered\"}")))
+		    
 		})
 	public ResponseEntity<UserModel> registerUser(@RequestBody @Valid UserModel user) {
 		userService.save(user);
@@ -140,7 +147,7 @@ public class UserController {
 					description = "update user by id",
 					content = @Content(
 							mediaType = "application/json",
-							schema = @Schema(implementation = UserModel.class))),
+							schema = @Schema(implementation = UserPatchModel.class))),
 			@ApiResponse(
 			        responseCode = "400",
 			        description = "Invalid data",

@@ -12,17 +12,25 @@ import org.springframework.stereotype.Service;
 import com.appRacer.Run.model.UserModel;
 import com.appRacer.Run.model.UserPatchModel;
 import com.appRacer.Run.repository.UserRepository;
+import com.appRacer.Run.utils.CpfUtils;
 
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private CpfUtils cpfUtils;
 	
 	public UserModel save(UserModel user) {
 		Float imc =  user.getWeight() / (user.getHeight() * user.getHeight());
 		imc = Math.round(imc * 100f) /100f;
 		user.setImc(imc);
+		
+		if(cpfUtils.compareCpf(user.getCpf()) == true) {
+			throw new IllegalArgumentException("CPF already registered");
+		} 
+		
 		return userRepository.save(user);
 	}
 	
@@ -55,7 +63,6 @@ public class UserService {
 		if(foundOpt.isPresent()) {
 			UserModel found = foundOpt.get();			
 			if(found.getName() != user.getName() && user.getName() != null) found.setName(user.getName());
-			if(found.getCpf() != user.getCpf() && user.getCpf() != null) found.setCpf(user.getCpf());
             if(found.getAge() != user.getAge() && user.getAge() != null) found.setAge(user.getAge());
             if(found.getHeight() != user.getHeight() && user.getHeight() != null) found.setHeight(user.getHeight());
             if(found.getWeight() != user.getWeight() && user.getWeight() != null) found.setWeight(user.getWeight());
