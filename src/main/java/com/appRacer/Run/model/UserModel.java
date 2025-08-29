@@ -60,7 +60,7 @@ public class UserModel {
 	@Max(value = 300, message = "weight: must be less than or equal to 300")
 	private Float weight;
 	@Column
-	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
+	@Schema(accessMode = Schema.AccessMode.READ_ONLY, example = "29.1")
 	private Float imc;
 
 	public UserModel(String name, String cpf, Integer age, Float height, Float weight, Float imc) {
