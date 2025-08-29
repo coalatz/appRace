@@ -55,7 +55,6 @@ public class UserService {
 		if(foundOpt.isPresent()) {
 			UserModel found = foundOpt.get();			
 			if(found.getName() != user.getName() && user.getName() != null) found.setName(user.getName());
-			if(found.getCpf() != user.getCpf() && user.getCpf() != null) found.setCpf(user.getCpf());
             if(found.getAge() != user.getAge() && user.getAge() != null) found.setAge(user.getAge());
             if(found.getHeight() != user.getHeight() && user.getHeight() != null) found.setHeight(user.getHeight());
             if(found.getWeight() != user.getWeight() && user.getWeight() != null) found.setWeight(user.getWeight());
