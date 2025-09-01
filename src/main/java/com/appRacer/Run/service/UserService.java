@@ -29,8 +29,13 @@ public class UserService {
 		
 		if(cpfUtils.compareCpf(user.getCpf()) == true) {
 			throw new IllegalArgumentException("CPF already registered");
-		} 
+		}
 		
+		if(!cpfUtils.isCpf(user.getCpf())) { throw new  IllegalArgumentException("CPF must be composed of digits");}
+		
+		user.setCpf(cpfUtils.formatCpf(user.getCpf()));
+		
+	
 		return userRepository.save(user);
 	}
 	

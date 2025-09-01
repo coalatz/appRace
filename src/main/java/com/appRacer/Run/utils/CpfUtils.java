@@ -21,4 +21,15 @@ public class CpfUtils {
 		}
 		return false;
 	}
+	
+	public String formatCpf(String cpf) {
+		cpf = cpf.replaceAll("\\D", "");
+		
+		return cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+	}
+	
+	public boolean isCpf(String cpf) {
+		if (cpf == null) return false; 
+	    return cpf.matches("\\d+"); 
+	}
 }

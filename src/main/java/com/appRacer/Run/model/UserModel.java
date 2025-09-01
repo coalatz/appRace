@@ -32,14 +32,13 @@ public class UserModel {
 	private UUID userId;
 	@Column
 	@NotBlank(message = "mandatory name field")
-	@Size(min = 10, max = 64, message = "name: size must be between 10 and 64")
+	@Size(min = 5, max = 64, message = "name: size must be between 5 and 64")
 	@Schema(example = "Eduardo Alves")
 	private String name;
 	@Column(unique = true)
 	@NotBlank(message = "mandatory cpf field")
 	@Schema(example = "111.222.333-04")
 	@Size(min = 11, max = 15, message = "CPF: size must be between 11 and 15")
-	@CPF
 	private String cpf;
 	@Column
 	@NotNull(message = "mandatory age field")
