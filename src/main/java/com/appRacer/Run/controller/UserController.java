@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appRacer.Run.model.UserModel;
@@ -107,19 +108,40 @@ public class UserController {
 		List<UserModel> listUsers = userService.usersFindAll();	
 		return new ResponseEntity<>(listUsers, HttpStatus.OK);
 	}
+	@Operation(summary = "List user by name")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "404",
+				description = "User not found",
+				content = @Content(
+						mediaType = "application/json",
+						examples = @ExampleObject("{ \"mensagem\": \"User not found\"}"))),
+			@ApiResponse(responseCode = "200",
+					description = "OK",
+					content = @Content(
+							mediaType = "application/json",
+							schema = @Schema(implementation = UserModel.class)))
+	
+	})
+	@GetMapping("name/{name}")
+	public ResponseEntity<UserModel> listUserName(@PathVariable String name) {
+		UserModel user =  userService.findUserByName(name);
+		
+		return new ResponseEntity<>(user, HttpStatus.OK);
+}
 	
 	@Operation(summary = "Delete user by id")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200",
-					description = "delete user by id",
-					content = @Content(
-							mediaType = "application/json",
-							examples = @ExampleObject("{ \"mensagem\": \"User deleted successfully\"}"))),
 			@ApiResponse(responseCode = "404", 
 					description = "user not found",
 					content = @Content(
 							mediaType = "application/json",
-							examples = @ExampleObject("{ \"mensagem\": \"User not found\"}")))
+							examples = @ExampleObject("{ \"mensagem\": \"User not found\"}"))),
+			@ApiResponse(responseCode = "200",
+					description = "delete user by id",
+					content = @Content(
+							mediaType = "application/json",
+							examples = @ExampleObject("{ \"mensagem\": \"User deleted successfully\"}")))
+
 	})
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable("id") UUID userId) {
