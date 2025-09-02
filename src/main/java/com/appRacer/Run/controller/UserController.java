@@ -96,6 +96,27 @@ public class UserController {
 		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
 	}
 	
+	
+	@ApiResponses( value = {
+			@ApiResponse(responseCode = "404", 
+				description = "User not found",
+				content = @Content(
+						mediaType = "application/json",
+						examples = @ExampleObject("{ \"mensagem\": \"User not found\"}")
+					)),
+			@ApiResponse(responseCode = "200",
+				description = "list user by cpf",
+				content = @Content(
+						mediaType = "application/json",
+						schema = @Schema(implementation = UserModel.class)))	
+	})
+	@Operation(summary = "List user by cpf")
+	@GetMapping("cpf/{cpf}")
+	public ResponseEntity<UserModel> findUserByCpf(@PathVariable String cpf) {
+		UserModel user = userService.finUserbyCpf(cpf);
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+	
 	@Operation(summary = "List all users")
 	@ApiResponse(responseCode = "200",
 			description = "list all users",
