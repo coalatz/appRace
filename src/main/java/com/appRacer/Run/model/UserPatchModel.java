@@ -23,7 +23,7 @@ public class UserPatchModel {
 
 	@Size(min = 10, max = 64, message = "name: size must be between 10 and 64")
 	private String name;
-	@Schema(example = "111.222.333-04")
+	@Schema(example = "111.222.333-04", accessMode = Schema.AccessMode.READ_ONLY)
 	@Size(min = 11, max = 15, message = "CPF: size must be between 11 and 15")
 	private String cpf;
 	@Min(value = 4, message = "age: must be greater than or equal to 4")
