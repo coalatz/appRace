@@ -12,7 +12,15 @@ import com.appRacer.Run.model.UserModel;
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, UUID>{
 
-	@Query("SELECT u FROM UserModel u WHERE u.cpf = :cpf")
-	Optional<UserModel> findUserByCpf(String cpf);
+	
+
+	
+	@Query("SELECT u FROM UserModel u WHERE u.name = :name")
+	Optional<UserModel> findUserByName(String name);
+
+
+	@Query("SELECT u.cpf FROM UserModel u WHERE u.cpf = :cpf ")
+	Optional<UserModel> findByCpf(String cpf);
+	
 
 }
