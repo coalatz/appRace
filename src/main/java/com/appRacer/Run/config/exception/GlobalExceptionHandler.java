@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import jakarta.persistence.NoResultException;
 
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -28,3 +29,4 @@ public class GlobalExceptionHandler {
 	}
 	
 }
+
