@@ -12,17 +12,30 @@ import org.springframework.stereotype.Service;
 import com.appRacer.Run.model.UserModel;
 import com.appRacer.Run.model.UserPatchModel;
 import com.appRacer.Run.repository.UserRepository;
+import com.appRacer.Run.utils.CpfUtils;
 
 @Service
 public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private CpfUtils cpfUtils;
 	
 	public UserModel save(UserModel user) {
 		Float imc =  user.getWeight() / (user.getHeight() * user.getHeight());
 		imc = Math.round(imc * 100f) /100f;
 		user.setImc(imc);
+		
+		if(cpfUtils.compareCpf(user.getCpf()) == true) {
+			throw new IllegalArgumentException("CPF already registered");
+		}
+		
+		if(!cpfUtils.isCpf(user.getCpf())) { throw new  IllegalArgumentException("CPF must be composed of digits");}
+		
+		user.setCpf(cpfUtils.formatCpf(user.getCpf()));
+		
+	
 		return userRepository.save(user);
 	}
 	
@@ -65,4 +78,5 @@ public class UserService {
 		return userNull;
 	
 	}
+	
 }
