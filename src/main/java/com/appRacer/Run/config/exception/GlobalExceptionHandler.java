@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
+import jakarta.persistence.NoResultException;
+
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -19,4 +22,11 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> handleInvalidFormatException(InvalidFormatException ex) {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
 	}
+	
+	@ExceptionHandler(NoResultException.class)
+	public ResponseEntity<String> handleNoResultException(NoResultException ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+	}
+	
 }
+

@@ -14,6 +14,8 @@ import com.appRacer.Run.model.UserPatchModel;
 import com.appRacer.Run.repository.UserRepository;
 import com.appRacer.Run.utils.CpfUtils;
 
+import jakarta.persistence.NoResultException;
+
 @Service
 public class UserService {
 
@@ -79,4 +81,14 @@ public class UserService {
 	
 	}
 	
+	public UserModel findUserByName(String name) {
+		Optional<UserModel> user = userRepository.findUserByName(name);
+		
+		if(user.isPresent()) {
+			UserModel userFound = user.get();
+			return userFound;
+		}
+		throw new NoResultException("User not found");
+	}
+
 }
