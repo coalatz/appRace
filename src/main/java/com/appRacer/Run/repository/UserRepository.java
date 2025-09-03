@@ -14,4 +14,5 @@ public interface UserRepository extends JpaRepository<UserModel, UUID>{
 
 	@Query("SELECT u FROM UserModel u WHERE u.cpf = :cpf")
 	Optional<UserModel> findUserByCpf(String cpf);
+
 }
