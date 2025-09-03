@@ -11,6 +11,7 @@ import com.appRacer.Run.model.UserModel;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, UUID>{
+
 	
 
 	

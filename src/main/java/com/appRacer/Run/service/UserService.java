@@ -81,6 +81,16 @@ public class UserService {
 	
 	}
 	
+	public UserModel finUserbyCpf(String cpf) {
+		Optional<UserModel> userOpt = userRepository.findByCpf(cpf);
+		if(userOpt.isPresent()) {
+			UserModel user = userOpt.get();
+			return user;
+		}
+	
+		
+		throw new NoResultException("User Not Found");
+	}
 	public UserModel findUserByName(String name) {
 		Optional<UserModel> user = userRepository.findUserByName(name);
 		
