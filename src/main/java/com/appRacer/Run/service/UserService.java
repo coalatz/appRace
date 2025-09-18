@@ -91,14 +91,9 @@ public class UserService {
 		
 		throw new NoResultException("User Not Found");
 	}
-	public UserModel findUserByName(String name) {
-		Optional<UserModel> user = userRepository.findUserByName(name);
-		
-		if(user.isPresent()) {
-			UserModel userFound = user.get();
-			return userFound;
-		}
-		throw new NoResultException("User not found");
+	public List<UserModel> findUserByName(String name) {
+		List<UserModel> user = userRepository.findByNameContainingIgnoreCase(name);
+			return user;
 	}
 
 }

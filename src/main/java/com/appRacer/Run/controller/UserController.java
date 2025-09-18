@@ -151,10 +151,10 @@ public class UserController {
 	
 	})
 	@GetMapping("name/{name}")
-	public ResponseEntity<UserModel> listUserName(@PathVariable String name) {
-		UserModel user =  userService.findUserByName(name);
+	public ResponseEntity<List<UserModel>> listUserName(@PathVariable String name) {
+		List<UserModel> users =  userService.findUserByName(name);
 		
-		return new ResponseEntity<>(user, HttpStatus.OK);
+		return new ResponseEntity<>(users, HttpStatus.OK);
 }
 	
 	@Operation(summary = "Delete user by id")
