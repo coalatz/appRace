@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.appRacer.Run.model.UserModel;
 import com.appRacer.Run.repository.UserRepository;
 
+
 @Component
 public class CpfUtils {
 
@@ -15,7 +16,7 @@ public class CpfUtils {
 	UserRepository userRepository;
 	
 	public boolean compareCpf(String cpf) {
-		Optional<UserModel> user = userRepository.findUserByCpf(cpf);
+		Optional<UserModel> user = userRepository.findByCpf(cpf);
 		if(user.isPresent()) {
 			return true;
 		}
