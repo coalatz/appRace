@@ -15,7 +15,7 @@ public class CpfUtils {
 	UserRepository userRepository;
 	
 	public boolean compareCpf(String cpf) {
-		Optional<UserModel> user = userRepository.findUserByCpf(cpf);
+		Optional<UserModel> user = userRepository.findByCpf(cpf);
 		if(user.isPresent()) {
 			return true;
 		}
