@@ -37,8 +37,6 @@ import jakarta.validation.Valid;
 public class UserController {
 
 	@Autowired
-	UserRepository userRepository;
-	@Autowired
 	UserService userService;
 
 	@PostMapping("register")

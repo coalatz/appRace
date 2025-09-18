@@ -1,5 +1,8 @@
 package com.appRacer.Run.config.exception;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,18 +17,24 @@ import jakarta.persistence.NoResultException;
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(IllegalArgumentException.class)
-	public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
-		return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+	public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex) {
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("error", ex.getMessage());
+		return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
 	}
 	
 	@ExceptionHandler(InvalidFormatException.class)
-	public ResponseEntity<String> handleInvalidFormatException(InvalidFormatException ex) {
-		return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+	public ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex) {
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("error", ex.getMessage());
+		return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
 	}
 	
 	@ExceptionHandler(NoResultException.class)
-	public ResponseEntity<String> handleNoResultException(NoResultException ex) {
-		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+	public ResponseEntity<Object> handleNoResultException(NoResultException ex) {
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("error", ex.getMessage());
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
 }
