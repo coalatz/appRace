@@ -1,6 +1,8 @@
 package com.appRacer.Run.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -99,7 +101,9 @@ public class UserController {
 		if(user != null) {
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
-		return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+		Map<String, String> errorResponse = new HashMap<>();
+		errorResponse.put("error", "User not found");
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 	
 	
