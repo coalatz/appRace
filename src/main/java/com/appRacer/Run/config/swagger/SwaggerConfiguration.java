@@ -38,7 +38,7 @@ public class SwaggerConfiguration {
 
                     Content internalErrorContent = new Content()
                             .addMediaType("application/json",
-                                    new MediaType().example("{ \"mensagem\": \"Internal server error\" }"));
+                                    new MediaType().example("{ \"error\": \"Internal server error\" }"));
                     operation.getResponses().addApiResponse("500",
                             new ApiResponse().description("Internal error").content(internalErrorContent));
 

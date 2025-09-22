@@ -71,7 +71,7 @@ public class UserController {
 		    		description = "CPF already registered",
 		    		content = @Content(
 		    				mediaType = "application/json",
-		    				examples = @ExampleObject("{ \"mensagem\": \"CPF already registered\"}")))
+		    				examples = @ExampleObject("{ \"error\": \"CPF already registered\"}")))
 		    
 		})
 	public ResponseEntity<UserModel> registerUser(@RequestBody @Valid UserModel user) {
@@ -84,7 +84,7 @@ public class UserController {
 				description = "User not found",
 				content = @Content(
 						mediaType = "application/json",
-						examples = @ExampleObject("{ \"mensagem\": \"User not found\"}")
+						examples = @ExampleObject("{ \"error\": \"User not found\"}")
 					)),
 			@ApiResponse(responseCode = "200",
 				description = "list user by id",
@@ -108,7 +108,7 @@ public class UserController {
 				description = "User not found",
 				content = @Content(
 						mediaType = "application/json",
-						examples = @ExampleObject("{ \"mensagem\": \"User not found\"}")
+						examples = @ExampleObject("{ \"error\": \"User not found\"}")
 					)),
 			@ApiResponse(responseCode = "200",
 				description = "list user by cpf",
@@ -135,19 +135,11 @@ public class UserController {
 		return new ResponseEntity<>(listUsers, HttpStatus.OK);
 	}
 	@Operation(summary = "List user by name")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "404",
-				description = "User not found",
+	@ApiResponse(responseCode = "200",
+				description = "OK",
 				content = @Content(
 						mediaType = "application/json",
-						examples = @ExampleObject("{ \"mensagem\": \"User not found\"}"))),
-			@ApiResponse(responseCode = "200",
-					description = "OK",
-					content = @Content(
-							mediaType = "application/json",
-							schema = @Schema(implementation = UserModel.class)))
-	
-	})
+						examples = @ExampleObject("[]")))
 	@GetMapping("name/{name}")
 	public ResponseEntity<List<UserModel>> listUserName(@PathVariable String name) {
 		List<UserModel> users =  userService.findUserByName(name);
@@ -161,7 +153,7 @@ public class UserController {
 					description = "user not found",
 					content = @Content(
 							mediaType = "application/json",
-							examples = @ExampleObject("{ \"mensagem\": \"User not found\"}"))),
+							examples = @ExampleObject("{ \"error\": \"User not found\"}"))),
 			@ApiResponse(responseCode = "200",
 					description = "delete user by id",
 					content = @Content(
@@ -183,7 +175,7 @@ public class UserController {
 					description = "user not found",
 					content = @Content(
 							mediaType = "application/json",
-							examples = @ExampleObject("{ \"mensagem\": \"User not found\"}"))),
+							examples = @ExampleObject("{ \"error\": \"User not found\"}"))),
 			@ApiResponse(responseCode = "200",
 					description = "update user by id",
 					content = @Content(
