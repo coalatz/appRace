@@ -82,6 +82,7 @@ public class UserService {
 	}
 	
 	public UserModel finUserbyCpf(String cpf) {
+		cpf = cpfUtils.formatCpf(cpf);
 		Optional<UserModel> userOpt = userRepository.findByCpf(cpf);
 		if(userOpt.isPresent()) {
 			UserModel user = userOpt.get();
