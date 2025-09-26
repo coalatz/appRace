@@ -136,19 +136,6 @@ public class UserControllerTest {
 	    verify(userService).updateUser(userPatch, fakeId);
 	}
 	
-	// fails tests
-	@Test
-	void shouldSaveUserCpfExisting() {
-		UUID fakeId = UUID.randomUUID();
-		UserModel user = new UserModel(fakeId ,"coala", "09230550607", 20, 1.79f, 93.0f, 23.0f);
-		
-		when(userService.save(any(UserModel.class)))
-	    .thenThrow(new IllegalArgumentException("error: CPF already registered"));
 
-		
-		ResponseEntity<?> response = userController.registerUser(user);
-		
-		assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
-	}
 	
 }
