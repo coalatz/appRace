@@ -68,9 +68,17 @@ public class UserModel {
 	    this.age = age;
 	    this.height = height;
 	    this.weight = weight;
-
-	    
-	    
 	    this.imc = imc;
 	}
+	
+	public UserModel(UUID userId, String nome, String cpf, int idade, float altura, float peso, float imc) {
+	    this.userId = userId;
+	    this.name = nome;
+	    this.cpf = cpf;
+	    this.age = idade;
+	    this.height = altura;
+	    this.weight = peso;
+	    this.imc = imc;
+	}
+
 }
