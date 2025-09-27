@@ -59,7 +59,7 @@ public class UserController {
 		              "errors": [
 		                "height: height: must be greater than or equal to 1",
 		                "weight: weight: must be greater than or equal to 20",
-		                "name: name: size must be between 10 and 64",
+		                "name: name: size must be between 5 and 64",
 		                "cpf: CPF: size must be between 11 and 15",
 		                "age: age: must be greater than or equal to 4"
 		              ]
