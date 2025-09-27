@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.appRacer.Run.model.UserModel;
 import com.appRacer.Run.repository.UserRepository;
 
+
 @Component
 public class CpfUtils {
 

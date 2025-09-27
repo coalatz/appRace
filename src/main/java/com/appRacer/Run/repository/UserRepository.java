@@ -1,5 +1,6 @@
 package com.appRacer.Run.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,8 +16,7 @@ public interface UserRepository extends JpaRepository<UserModel, UUID>{
 	
 
 	
-	@Query("SELECT u FROM UserModel u WHERE u.name = :name")
-	Optional<UserModel> findUserByName(String name);
+	List<UserModel> findByNameContainingIgnoreCase(String name);
 
 
 	@Query("SELECT u FROM UserModel u WHERE u.cpf = :cpf ")

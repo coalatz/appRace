@@ -26,6 +26,11 @@ Execute com o comando:
    ```bash
    java -jar target/Run.jar
    ```
+   
+## Testes Unitarios
+   ```bash
+   mvn test
+   ```
 
 ## 🌐 Acesso à API
 Após a execução, a API estará disponível em:
