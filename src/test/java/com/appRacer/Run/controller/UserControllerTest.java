@@ -48,7 +48,7 @@ public class UserControllerTest {
 	@Test
 	void shouldFindUserId() {
 		UUID fakeId = UUID.randomUUID();
-		UserModel user = new UserModel(fakeId ,"coala", "09230550607", 20, 1.79f, 93.0f, 23.0f);
+		UserModel user = new UserModel("coala", "09230550607", 20, 1.79f, 93.0f, 23.0f);
 		
 		when(userService.UserFindId(user.getUserId())).thenReturn(user);
 		
@@ -106,7 +106,7 @@ public class UserControllerTest {
 	@Test
 	void shouldUserDeleteId() {
 		UUID fakeId = UUID.randomUUID();
-		UserModel user = new UserModel(fakeId ,"coala", "09230550607", 20, 1.79f, 93.0f, 23.0f);	
+		UserModel user = new UserModel("coala", "09230550607", 20, 1.79f, 93.0f, 23.0f);	
 		user.setUserId(fakeId);
 		
 		
@@ -125,7 +125,7 @@ public class UserControllerTest {
 	    UserPatchModel userPatch = new UserPatchModel();
 	    userPatch.setName("paulo");
 	    
-	    UserModel updatedUser = new UserModel(fakeId ,"paulo", "09230550607", 20, 1.79f, 93.0f, 23.0f);
+	    UserModel updatedUser = new UserModel("paulo", "09230550607", 20, 1.79f, 93.0f, 23.0f);
 
 	    when(userService.updateUser(userPatch, fakeId)).thenReturn(updatedUser);
 	    
